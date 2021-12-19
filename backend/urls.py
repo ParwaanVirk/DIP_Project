@@ -5,5 +5,6 @@ from backend.views import *
 urlpatterns = [
     path('TransformerAll/', TransformerDataAll, name = 'all data'),
     path('TransformerLoc/', TransformerLocality, name = 'lim data'),
-    
+    path('TransformerID', TransformerByID, name = 'by id'),
+
 ]

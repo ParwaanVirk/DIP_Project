@@ -29,3 +29,17 @@ def TransformerLocality(request):
         return Response(data = "Wrong request Type", status = 300)    
 
 
+
+
+@api_view(['POST', ])
+def TransformerByID(request):
+    if request.mdehod == "POST":
+        TransID = request.data['TransID']
+        
+        LatestData = Transformer.objects.filter(Transformer_ID = TransID).order_by('-TimeStamp')
+        SerializedData = TransformerSerializer(LatestData, many = True)
+        return Response(SerializedData.data)
+    else:
+        return Response(data = "Wrong request Type", status = 300)    
+
+
