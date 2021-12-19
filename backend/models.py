@@ -22,4 +22,4 @@ class Transformer(models.Model):
     Overall_Health = models.FloatField()
 
     def __str__(self) -> str:
-        return self.Transformer_ID
+        return str(self.id)  
