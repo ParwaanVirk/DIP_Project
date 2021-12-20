@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 @api_view(['POST', ])
 def TransformerDataAll(request):
-    if request.mehod == 'POST':
+    if request.method == 'POST':
         LatestData = Transformer.objects.order_by('-TimeStamp')
         SerializedData = TransformerSerializer(LatestData, many = True)
         return Response(SerializedData.data)
@@ -17,7 +17,7 @@ def TransformerDataAll(request):
     
 @api_view(['POST', ])
 def TransformerLocality(request):
-    if request.mdehod == "POST":
+    if request.method == "POST":
         loc_type = request.data['loc_type']
         if loc_type == '01' or loc_type == '02' or loc_type == '03':
             LatestData = Transformer.objects.filter(Locality = loc_type).order_by('-TimeStamp')
@@ -33,7 +33,7 @@ def TransformerLocality(request):
 
 @api_view(['POST', ])
 def TransformerByID(request):
-    if request.mdehod == "POST":
+    if request.method == "POST":
         TransID = request.data['TransID']
         
         LatestData = Transformer.objects.filter(Transformer_ID = TransID).order_by('-TimeStamp')
