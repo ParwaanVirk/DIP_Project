@@ -14,7 +14,26 @@ def TransformerDataAll(request):
         return Response(SerializedData.data)
     else:
         return Response(data = "Wrong Request", status = 300)
-    
+
+
+@api_view(['POST', ])
+def TransformerIDS(request):
+    if request.method == 'POST':
+        datas_list = []
+        datas1 = {}
+        datas2 = {}
+        datas3 = {}
+
+        datas1["Transformer_ID"] = "TF-01"
+        datas2["Transformer_ID"] = "TF-02"
+        datas3["Transformer_ID"] = "TF-03"
+        datas_list.append(datas1)
+        datas_list.append(datas2)
+        datas_list.append(datas3)
+        return Response(datas_list)
+    else:
+        return Response(data = "Wrong Request", status = 300)
+  
 
     
 @api_view(['POST', ])
