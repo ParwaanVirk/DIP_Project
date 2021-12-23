@@ -15,6 +15,8 @@ def TransformerDataAll(request):
     else:
         return Response(data = "Wrong Request", status = 300)
     
+
+    
 @api_view(['POST', ])
 def TransformerLocality(request):
     if request.method == "POST":
