@@ -57,7 +57,7 @@ def TransformerByID(request):
     if request.method == "POST":
         TransID = request.data['TransID']
         
-        LatestData = Transformer.objects.filter(Transformer_ID = TransID).order_by('-TimeStamp')
+        LatestData = Transformer.objects.filter(Transformer_ID = TransID).order_by('-TimeStamp')[:900]
         SerializedData = TransformerSerializer(LatestData, many = True)
         return Response(SerializedData.data)
     else:
