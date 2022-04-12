@@ -13,16 +13,18 @@ class RegistrationView(APIView):
             'email': request.data.get('email', None),
             'username': request.data.get('username', None),
             'password' : request.data.get('password', None), 
-            'latitude' : request.data.get('latitude', None),
-            'longitude' : request.data.get('longitude', None),
         }
         userType = request.data.get('superuser', None)
+        latitude = request.data.get('latitude', None),
+        longitude = request.data.get('longitude', None),
         serializer = RegistrationSerializer(data = requester)
         data = {}
         if userType == "YES":
             if serializer.is_valid():
                 Caccount = serializer.save()
                 Caccount.is_superuser = True
+                Caccount.latitude = latitude
+                Caccount.longitude = longitude
                 Caccount.save()
                 data['response'] = "Successfully registered a new user"
                 status = 200
@@ -34,6 +36,8 @@ class RegistrationView(APIView):
             if serializer.is_valid():
                 Caccount = serializer.save()
                 Caccount.is_normaluser = True
+                Caccount.latitude = latitude
+                Caccount.longitude = longitude
                 Caccount.save()
                 data['response'] = "Successfully registered a new user"
                 status = 200

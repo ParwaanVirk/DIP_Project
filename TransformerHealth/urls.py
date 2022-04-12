@@ -20,4 +20,5 @@ urlpatterns = [
     # path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('admin1/', admin.site.urls),
     path("backend/",include('backend.urls')),
+    path("login/",include('login.urls')),
 ]

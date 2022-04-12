@@ -40,12 +40,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework.authtoken",
     'backend',
     "corsheaders",
     "rest_framework",
+    'login',
     # "admin_honeypot",
 
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+
+AUTH_USER_MODEL = 'login.Account'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -7,7 +7,7 @@ from django.core.validators import MaxValueValidator
 class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['email', 'username', 'latitude','longitude','password']
+        fields = ['email', 'username', 'password']
         extra_kwargs = {
             'password': {'write_only':True}
         }
@@ -16,8 +16,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
         account = Account(
             email = self.validated_data['email'],
             username = self.validated_data['username'],
-            latitude = self.validated_data['latitude'],
-            longitude = self.validated_data['longitude'],
         )
         password = self.validated_data['password']
         account.set_password(password)

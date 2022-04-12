@@ -1,4 +1,3 @@
-from multiprocessing.sharedctypes import Value
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
@@ -8,33 +7,29 @@ from django.conf import settings
 from rest_framework.authtoken.models import Token
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, email, username,latitude, longitude, password=None):
+    def create_user(self, email, username, password=None):
         if not email:
             raise ValueError("Users must have an email adress")
         if not username:
             raise ValueError("Users must have a username")
-        if not latitude:
-            raise ValueError("User latitude not provided")
-        if not longitude:
-            raise ValueError("User longitude not provided")
+        # if not latitude:
+        #     raise ValueError("User latitude not provided")
+        # if not longitude:
+        #     raise ValueError("User longitude not provided")
 
         user = self.model(
             email = self.normalize_email(email),
             username = username,
-            longitude = longitude,
-            latitude = latitude,
         )
         user.set_password(password)
         user.save(using = self._db)
         return user
     
-    def create_superuser(self, email, username, latitude, longitude, password):
+    def create_superuser(self, email, username, password):
         user = self.create_user(
             email = self.normalize_email(email),
             password = password,
             username = username,
-            longitude = longitude,
-            latitude = latitude,
             )
         user.is_admin = True
         user.is_staff = True
@@ -60,7 +55,7 @@ class Account(AbstractBaseUser):
     longitude               = models.FloatField(default=0)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'latitude', 'longitude']
+    REQUIRED_FIELDS = ['username',]
 
     objects = MyAccountManager()
 
