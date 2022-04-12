@@ -23,8 +23,8 @@ class RegistrationView(APIView):
             if serializer.is_valid():
                 Caccount = serializer.save()
                 Caccount.is_superuser = True
-                Caccount.latitude = latitude
-                Caccount.longitude = longitude
+                Caccount.latitude = float(latitude[0])
+                Caccount.longitude = float(longitude[0])
                 Caccount.save()
                 data['response'] = "Successfully registered a new user"
                 status = 200
@@ -36,8 +36,8 @@ class RegistrationView(APIView):
             if serializer.is_valid():
                 Caccount = serializer.save()
                 Caccount.is_normaluser = True
-                Caccount.latitude = latitude
-                Caccount.longitude = longitude
+                Caccount.latitude = float(latitude[0])
+                Caccount.longitude = float(longitude[0])
                 Caccount.save()
                 data['response'] = "Successfully registered a new user"
                 status = 200
