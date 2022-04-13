@@ -1,5 +1,5 @@
 from django.db import models
-
+from login.models import Account
 # Create your models here.
 CODE_CHOICES = [
     ('01', "Resedential Rural"),
@@ -9,9 +9,17 @@ CODE_CHOICES = [
 
 class Transformer(models.Model):
     id = models.AutoField(primary_key=True)
-    TimeStamp = models.DateTimeField()
-    Transformer_ID = models.CharField(max_length=50, )
+    Transformer_ID = models.CharField(max_length=50, unique=True)
     Transformer_Type = models.CharField(max_length=2, choices=CODE_CHOICES)
+    latitude = models.FloatField(default=0)
+    longitude = models.FloatField(default=0)
+    accounts = models.ManyToManyField(Account)
+
+    def __str__(self) -> str:
+        return str(self.id)  
+
+class TransData(models.Model):
+    TimeStamp = models.DateTimeField()
     Current_Input = models.FloatField()
     Voltage_Input = models.FloatField()
     Oil_Temprature = models.FloatField()
@@ -20,6 +28,5 @@ class Transformer(models.Model):
     Moisture_Level = models.FloatField()
     Tapping_Ratio = models.FloatField()
     Overall_Health = models.FloatField()
+    transformer = models.ForeignKey(Transformer, related_name='transformer', on_delete=models.CASCADE)
 
-    def __str__(self) -> str:
-        return str(self.id)  
