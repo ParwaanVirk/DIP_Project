@@ -19,6 +19,7 @@ class Transformer(models.Model):
         return str(self.id)  
 
 class TransData(models.Model):
+    id = models.BigAutoField()
     TimeStamp = models.DateTimeField()
     Current_Input = models.FloatField()
     Voltage_Input = models.FloatField()
@@ -30,3 +31,6 @@ class TransData(models.Model):
     Overall_Health = models.FloatField()
     transformer = models.ForeignKey(Transformer, related_name='transformer', on_delete=models.CASCADE)
 
+
+    def __str__(self) -> str:
+        return str(self.transformer + " || " + self.id)

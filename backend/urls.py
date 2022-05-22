@@ -3,10 +3,6 @@ from django.urls.resolvers import URLPattern
 from backend.views import *
 
 urlpatterns = [
-    path('TransformerAll/', TransformerDataAll, name = 'all data'),
-    path('TransformerLoc/', TransformerLocality, name = 'lim data'),
-    path('Transformer_by_ID/', TransformerByID, name = 'by id'),
-    path('TransformerIDS/', TransformerIDS, name = 'all id'),
-
-
+    path('TransformerAll/', TransformerAllView.as_view(), name = 'all data'),
+    path('Transdata_particular_view/', TransData_Particular_View.as_view(), name = 'trans parameters'), 
 ]
