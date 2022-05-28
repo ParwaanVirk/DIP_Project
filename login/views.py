@@ -14,30 +14,15 @@ class RegistrationView(APIView):
             'username': request.data.get('username', None),
             'password' : request.data.get('password', None), 
         }
-        userType = request.data.get('superuser', None)
-        latitude = request.data.get('latitude', None),
-        longitude = request.data.get('longitude', None),
         serializer = RegistrationSerializer(data = requester)
         data = {}
-        if userType == "YES":
-            if serializer.is_valid():
-                Caccount = serializer.save()
-                Caccount.is_superuser = True
-                Caccount.latitude = float(latitude[0])
-                Caccount.longitude = float(longitude[0])
-                Caccount.save()
-                data['response'] = "Successfully registered a new user"
-                status = 200
-            else:
-                data = serializer.errors
-                status = 422
-
-        elif userType == "NO":
+        userType = "NO"
+        if userType == "NO":
             if serializer.is_valid():
                 Caccount = serializer.save()
                 Caccount.is_normaluser = True
-                Caccount.latitude = float(latitude[0])
-                Caccount.longitude = float(longitude[0])
+                Caccount.latitude = 32.333
+                Caccount.longitude = 76.666                
                 Caccount.save()
                 data['response'] = "Successfully registered a new user"
                 status = 200
