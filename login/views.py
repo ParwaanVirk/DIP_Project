@@ -9,6 +9,9 @@ from rest_framework.permissions import IsAuthenticated
 
 class RegistrationView(APIView):
     def post(self, request, *args, **kwargs):
+        print(request.data.get('email'))
+        print(request.data.get('username'))
+        print(request.data.get('password'))
         requester = {
             'email': request.data.get('email', None),
             'username': request.data.get('username', None),
