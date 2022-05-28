@@ -4,6 +4,7 @@ from backend.models import TransData, Transformer
 from backend.serializers import TransformerSerializer, TransDataSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from backend.MongoFetcher import get_database 
 
 
 class TransformerAllView(APIView):
@@ -37,3 +38,12 @@ class TransData_Particular_View(APIView):
             return Response(data=serialized_params_list.data, status=200)
         else:
             return Response(data="NO transdata exists", status=300)
+
+
+
+class MongoDbFeeder(APIView):
+    def get(self, request, *args, **kwargs):
+        # cuser = request.user
+        # if cuser != None:
+        get_database()
+        return Response(data = "Successfull", status = 200)
