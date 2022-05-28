@@ -7,6 +7,7 @@ CODE_CHOICES = [
     ('03', "Industrial"),
 ]
 
+
 class Transformer(models.Model):
     id = models.AutoField(primary_key=True)
     Transformer_ID = models.CharField(max_length=50, unique=True)
@@ -16,11 +17,12 @@ class Transformer(models.Model):
     accounts = models.ManyToManyField(Account)
 
     def __str__(self) -> str:
-        return str(self.id)  
+        return str(self.id)
+
 
 class TransData(models.Model):
-    id = models.BigAutoField()
-    TimeStamp = models.DateTimeField()
+    id = models.BigAutoField(primary_key=True)
+    TimeStamp = models.DateTimeField(auto_now_add=True)
     Current_Input = models.FloatField()
     Voltage_Input = models.FloatField()
     Oil_Temprature = models.FloatField()
@@ -29,8 +31,8 @@ class TransData(models.Model):
     Moisture_Level = models.FloatField()
     Tapping_Ratio = models.FloatField()
     Overall_Health = models.FloatField()
-    transformer = models.ForeignKey(Transformer, related_name='transformer', on_delete=models.CASCADE)
-
+    transformer = models.ForeignKey(
+        Transformer, related_name='transformer', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return str(self.transformer + " || " + self.id)
