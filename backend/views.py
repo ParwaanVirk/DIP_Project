@@ -26,7 +26,9 @@ class TransData_Particular_View(APIView):
         if cuser != None:
             trans_id = request.data.get('trans_id', None)
             transformer_object = Transformer.objects.filter(id = trans_id)[0]
+            print(transformer_object)
             transformer_params_objects = TransData.objects.filter(transformer = transformer_object)
+            print(transformer_params_objects)
             serialized_params_list = TransDataSerializer(transformer_params_objects, many = True)
             return Response(data = serialized_params_list.data, status = 200)
         else:
