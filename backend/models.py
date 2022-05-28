@@ -35,4 +35,4 @@ class TransData(models.Model):
         Transformer, related_name='transformer', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return str(self.transformer + " || " + self.id)
+        return str(str(self.transformer) + " || " + str(self.id))
